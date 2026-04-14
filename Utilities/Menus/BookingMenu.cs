@@ -1,4 +1,5 @@
 ﻿using HotelEC.Data;
+using HotelEC.Services.BookingServices;
 using Spectre.Console;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,8 @@ namespace HotelEC.Utilities.Menus
             switch (option)
             {
                 case "Skapa bokning":
-                    //create booking
+                    var action = new CreateBooking(db);
+                    action.Run();
                     break;
                 case "Visa bokningar":
                     //show bookings

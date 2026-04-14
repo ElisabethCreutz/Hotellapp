@@ -11,10 +11,11 @@ namespace HotelEC.Utilities.Menus
     {
         public static void RunMenu(ApplicationDbContext db)
         {
-            Console.Clear();
+           
             bool isRunning = true;
             while (isRunning)
             {
+                Console.Clear();
                 var option = AnsiConsole.Prompt(
             new SelectionPrompt<string>()
                 .Title("Menyval")
@@ -26,10 +27,10 @@ namespace HotelEC.Utilities.Menus
                 switch (option)
                 {
                     case "Bokningar":
-                        //booking menu
+                        BookingMenu.RunBookingMenu(db);
                         break;
                     case "Rum":
-                        //Room menu
+                        RoomMenu.RunRoomMenu(db);
                         break;
                     case "Kunder":
                         CustomerMenu.RunCustomerMenu(db);

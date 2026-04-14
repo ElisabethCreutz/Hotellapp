@@ -1,18 +1,16 @@
 ﻿using HotelEC.Data;
-using HotelEC.Models.RoomModels;
-using Microsoft.EntityFrameworkCore;
 using Spectre.Console;
 
 namespace HotelEC.Utilities
 {
     public class SpectreTables
     {
-        public ApplicationDbContext dbContext { get; set;  }
+        public ApplicationDbContext dbContext { get; set; }
 
 
         public SpectreTables(ApplicationDbContext db)
         {
-           dbContext = db;
+            dbContext = db;
         }
 
         public void DisplayCustomerTable()
@@ -36,6 +34,21 @@ namespace HotelEC.Utilities
             {
                 roomTable.AddRow(room.RoomNumber.ToString(), room.FloorId.ToString(), room.StatusId.ToString());
             }
+            AnsiConsole.Write(roomTable);
+        }
+        public void DisplayBookingTable()
+        {
+            var bookingTable = new Table();
+            bookingTable.AddColumns("Incheckningsdatum", "Utcheckningsdatum", "Antal vuxna", "Antal barn");
+            foreach (var booking in dbContext.Bookings)
+            {
+                bookingTable.AddRow(booking.CheckInDate, booking.CheckOutDate, booking.NumAdults.ToString(), booking.NumChildren.ToString());
+            }
+            AnsiConsole.Write(bookingTable);
+            AnsiConsole.MarkupLine("[green]Bokningstabell visad![/]");
+            AnsiConsole.MarkupLine("[yellow]Tryck på valfri tangent för att fortsätta...[/]");
+            Console.ReadKey();
+
         }
     }
 }

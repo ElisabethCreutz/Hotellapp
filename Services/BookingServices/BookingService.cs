@@ -7,7 +7,7 @@ using System.Diagnostics.Metrics;
 using System.Runtime.Intrinsics.X86;
 using System.Text;
 
-namespace HotelEC.Services
+namespace HotelEC.Services.BookingServices
 {
 
     public class BookingService

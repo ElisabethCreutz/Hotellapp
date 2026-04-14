@@ -1,6 +1,7 @@
 ﻿using HotelEC.Controllers;
 using HotelEC.Data;
 using HotelEC.Services;
+using HotelEC.Services.CustomerServices;
 using Spectre.Console;
 using System;
 using System.Collections.Generic;
@@ -22,19 +23,19 @@ namespace HotelEC.Utilities.Menus
             switch (option)
             {
                 case "Skapa kund":
-                   var customerService= new CustomerService(db);
-                   customerService.CreateCustomer();
+                   var action= new CreateCustomer(db);
+                    action.Run();
                     break;
                 case "Visa kunder":
                     var displayTable=new SpectreTables(db);
                     displayTable.DisplayCustomerTable();
                     break;
                 case "Uppdatera kund":
-                    //update customer
-                    break;
+                    var action2 = new UpdateCustomer(db);
+                    action2.Run(); break;
                 case "Ta bort kund":
-                    //delete customer
-                    break;
+                    var action3 = new DeleteCustomer(db);
+                    action3.Run(); break;
                 case "Tillbaka":
                     Console.Clear();
                     MainMenu.RunMenu(db);

@@ -18,7 +18,6 @@ namespace HotelEC.Services.CustomerServices
             ValidationResult result;
             do
             {
-                var customerService = new CustomerService(dbContext);
                 Console.WriteLine("Vad heter du?");
                 customer.FirstName = Console.ReadLine();
                 Console.WriteLine("Vad är ditt efternamn?");
