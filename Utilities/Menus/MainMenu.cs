@@ -11,6 +11,7 @@ namespace HotelEC.Utilities.Menus
     {
         public static void RunMenu(ApplicationDbContext db)
         {
+            Console.Clear();
             bool isRunning = true;
             while (isRunning)
             {

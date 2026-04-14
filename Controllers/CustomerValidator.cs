@@ -13,7 +13,7 @@ namespace HotelEC.Controllers
             RuleFor(customer => customer.FirstName).NotEmpty().WithMessage("Förnamn är obligatoriskt.");
             RuleFor(customer => customer.LastName).NotEmpty().WithMessage("Efternamn är obligatoriskt.");
             RuleFor(customer => customer.EmailAddress).NotEmpty().WithMessage("E-postadress är obligatoriskt.")
-                                                      .EmailAddress().WithMessage("Ogiltig e-postadress.");
+                                                      .EmailAddress(mode:FluentValidation.Validators.EmailValidationMode.Net4xRegex).WithMessage("Ogiltig e-postadress.");
             RuleFor(customer => customer.PhoneNumber).NotEmpty().WithMessage("Telefonnummer är obligatoriskt.");
         }
     }
