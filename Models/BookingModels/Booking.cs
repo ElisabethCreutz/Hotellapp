@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace HotelEC.Models
+namespace HotelEC.Models.BookingModels
 {
     public class Booking
     {

@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace HotelEC.Models
+namespace HotelEC.Models.RoomModels
 {
-    public class Feature
+    public class RoomStatus
     {
         public int Id { get; set; }
-        public string Name { get; set; }
+        public string StatusName { get; set; }
 
     }
 }

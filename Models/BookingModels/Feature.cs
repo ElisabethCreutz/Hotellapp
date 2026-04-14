@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace HotelEC.Models
+namespace HotelEC.Models.BookingModels
 {
-    public class Floor
+    public class Feature
     {
         public int Id { get; set; }
-        public int FloorNumber { get; set; }
+        public string Name { get; set; }
 
     }
 }

@@ -1,4 +1,6 @@
-﻿using HotelEC.Models;
+﻿using HotelEC.Models.BookingModels;
+using HotelEC.Models.CustomerModels;
+using HotelEC.Models.RoomModels;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -11,9 +13,9 @@ namespace HotelEC.Data
     {
         // DbSet-skikt för att representera tabellerna i databasen.
         // Varje DbSet skapar en "tabell" i databasen för respektive typ.
-        public DbSet<Customer> Customer { get; set; }
-        public DbSet<Booking> Booking { get; set; }
-        public DbSet<Room> Room { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Booking> Bookings { get; set; }
+        public DbSet<Room> Rooms { get; set; }
         //public DbSet<Floor> Floor { get; set; }
         //public DbSet<Payment> Payment { get; set; }
         //public DbSet<RoomClass> RoomClass { get; set; }

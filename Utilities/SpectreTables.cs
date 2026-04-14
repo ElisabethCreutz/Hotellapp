@@ -1,31 +1,41 @@
-﻿using Spectre.Console;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using HotelEC.Data;
+using HotelEC.Models.RoomModels;
+using Microsoft.EntityFrameworkCore;
+using Spectre.Console;
 
 namespace HotelEC.Utilities
 {
-    internal class SpectreTables
+    public class SpectreTables
     {
+        public ApplicationDbContext dbContext { get; set;  }
+
+
+        public SpectreTables(ApplicationDbContext db)
+        {
+           dbContext = db;
+        }
 
         public void DisplayCustomerTable()
         {
-            // Här kan du implementera logiken för att visa en tabell med Spectre.Console
-            // Exempel:
             var CustTable = new Table();
-            CustTable.AddColumn("Name");
-            CustTable.AddColumn("Address");
-            CustTable.AddRow("Row 1, Cell 1", "Row 1, Cell 2");
-            CustTable.AddRow("Row 2, Cell 1", "Row 2, Cell 2");
+            CustTable.AddColumn("Förnamn");
+            CustTable.AddColumn("Efternamn");
+            CustTable.AddColumn("Telefonnummer");
+            CustTable.AddColumn("E-postadress");
+            foreach (var customer in dbContext.Customers)
+            {
+                CustTable.AddRow(customer.FirstName, customer.LastName, customer.PhoneNumber, customer.EmailAddress);
+            }
             AnsiConsole.Write(CustTable);
         }
-        public void DisplayRoomTable() 
-        { 
-            var RoomTable = new Table();
-            RoomTable.AddColumn("Name");
-            RoomTable.AddColumn("Floor");
-            RoomTable.AddRow("db.name1", "db.floor1");
+        public void DisplayRoomTable()
+        {
+            var roomTable = new Table();
+            roomTable.AddColumns("Rumsnummer", "Våning", "Status");
+            foreach (var room in dbContext.Rooms)
+            {
+                roomTable.AddRow(room.RoomNumber.ToString(), room.FloorId.ToString(), room.StatusId.ToString());
+            }
         }
-
     }
 }
