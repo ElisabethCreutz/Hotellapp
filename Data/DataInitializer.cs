@@ -25,26 +25,26 @@ namespace HotelEC.Data
             {
                 dbContext.Rooms.AddRange(new Room
                 {
-                    FloorId = 1,
-                    StatusId = 1,
+                    Floor = 1,
+                    IsBooked = false,
                     RoomNumber = 101
                 },
                 new Room
                 {
-                    FloorId = 2,
-                    StatusId = 1,
+                    Floor = 2,
+                    IsBooked = false,
                     RoomNumber = 201
                 },
                 new Room
                 {
-                    FloorId = 3,
-                    StatusId = 1,
+                    Floor = 3,
+                    IsBooked = false,
                     RoomNumber = 301
                 },
                 new Room
                 {
-                    FloorId = 4,
-                    StatusId = 1,
+                    Floor = 4,
+                    IsBooked = false,
                     RoomNumber = 401
                 }
                 );

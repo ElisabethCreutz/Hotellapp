@@ -1,4 +1,5 @@
 ﻿using HotelEC.Data;
+using HotelEC.Services.RoomServices;
 using Spectre.Console;
 using System;
 using System.Collections.Generic;
@@ -27,11 +28,16 @@ namespace HotelEC.Utilities.Menus
                     roomTable.DisplayRoomTable();
                     break;
                 case "Lägg till nytt rum":
-
+                    var createRoom = new CreateRoom(db);
+                    createRoom.Run();
                     break;
                 case "Uppdatera rum":
+                    var updateRoom = new UpdateRoom(db);
+                    updateRoom.Run();
                     break;
                 case "Ta bort rum":
+                    var deleteRoom = new DeleteRoom(db);
+                    deleteRoom.Run();
                     break;
                 case "Tillbaka till huvudmenyn":
                     break;

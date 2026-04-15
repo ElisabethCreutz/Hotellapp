@@ -25,6 +25,7 @@ namespace HotelEC.Utilities
                 CustTable.AddRow(customer.FirstName, customer.LastName, customer.PhoneNumber, customer.EmailAddress);
             }
             AnsiConsole.Write(CustTable);
+            Console.ReadKey();
         }
         public void DisplayRoomTable()
         {
@@ -32,9 +33,10 @@ namespace HotelEC.Utilities
             roomTable.AddColumns("Rumsnummer", "Våning", "Status");
             foreach (var room in dbContext.Rooms)
             {
-                roomTable.AddRow(room.RoomNumber.ToString(), room.FloorId.ToString(), room.StatusId.ToString());
+                roomTable.AddRow(room.RoomNumber.ToString(), room.Floor.ToString(), room.IsBooked.ToString());
             }
             AnsiConsole.Write(roomTable);
+            Console.ReadKey();
         }
         public void DisplayBookingTable()
         {

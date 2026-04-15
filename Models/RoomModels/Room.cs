@@ -7,10 +7,9 @@ namespace HotelEC.Models.RoomModels
     public class Room
     {
         public int Id { get; set; }
-        public int FloorId { get; set; }
-        //public Floor floor { get; set; }
-        public int StatusId { get; set; }
+        public int Floor { get; set; }
+        public bool IsBooked { get; set; }
         public int RoomNumber { get; set; }
-        
+        public string RoomType { get; set; }
     }
 }
