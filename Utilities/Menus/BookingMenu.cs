@@ -14,10 +14,9 @@ namespace HotelEC.Utilities.Menus
 
             var option = AnsiConsole.Prompt(
         new SelectionPrompt<string>()
-            .Title("Bokningsmeny")
             .WrapAround()
             .AddChoices("Skapa bokning", "Visa bokningar", "Uppdatera bokning", "Ta bort bokning", "Tillbaka"));
-            AnsiConsole.MarkupLine($"[blue]{option}[/]");
+            AnsiConsole.MarkupLine($"[blue]{option.ToUpper()}[/]");
             switch (option)
             {
                 case "Skapa bokning":

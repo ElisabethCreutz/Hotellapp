@@ -20,11 +20,11 @@ namespace HotelEC.Utilities.Menus
                 Visuals.DisplayShorttitle();
                 var option = AnsiConsole.Prompt(
             new SelectionPrompt<string>()
-                .Title("Huvudmeny")
+                .Title("HUVUDMENY")
                 .WrapAround()
                 .AddChoices("Bokningar", "Rum", "Kunder", "Avsluta"));
 
-                AnsiConsole.MarkupLine($"[blue]{option}[/]");
+                AnsiConsole.MarkupLine($"[blue]{option.ToUpper()}[/]\n");
 
                 switch (option)
                 {

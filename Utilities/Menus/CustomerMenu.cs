@@ -10,10 +10,9 @@ namespace HotelEC.Utilities.Menus
         public static void RunCustomerMenu(ApplicationDbContext db)
         {
             var option = AnsiConsole.Prompt(new SelectionPrompt<string>()
-                .Title("Kundmeny")
                 .WrapAround()
                 .AddChoices("Skapa kund", "Visa kunder", "Uppdatera kund", "Ta bort kund", "Tillbaka"));
-            AnsiConsole.MarkupLine($"Du har valt [blue]{option}[/]");
+            AnsiConsole.MarkupLine($"[blue]{option.ToUpper()}[/]");
             switch (option)
             {
                 case "Skapa kund":

@@ -13,14 +13,14 @@ namespace HotelEC.Utilities.Menus
         {
             var options = AnsiConsole.Prompt(
                 new SelectionPrompt<string>()
-                .Title("Rumsmeny")
                 .AddChoices(new[] {
                     "Visa alla rum",
                     "Lägg till nytt rum",
                     "Uppdatera rum",
                     "Ta bort rum",
-                    "Tillbaka till huvudmenyn"
+                    "Tillbaka"
                 }));
+            AnsiConsole.MarkupLine($"[blue]{options.ToUpper()}[/]");
             switch (options)
             {
                 case "Visa alla rum":
