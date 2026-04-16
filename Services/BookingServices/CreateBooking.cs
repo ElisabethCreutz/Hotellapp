@@ -54,6 +54,7 @@ namespace HotelEC.Services.BookingServices
                     .Title("Extrasängar:").AddChoices(0, 1));
                 }
             }
+            //display a summary of the booking before saving
             dbContext.Bookings.Add(booking);
             dbContext.SaveChanges();
         }

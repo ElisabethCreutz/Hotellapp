@@ -1,8 +1,5 @@
 ﻿using HotelEC.Models.CustomerModels;
 using HotelEC.Models.RoomModels;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace HotelEC.Models.BookingModels
 {

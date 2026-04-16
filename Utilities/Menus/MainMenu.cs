@@ -11,17 +11,18 @@ namespace HotelEC.Utilities.Menus
     {
         public static void RunMenu(ApplicationDbContext db)
         {
-           
+            Visuals.DisplayTitle();
+            Thread.Sleep(2000);
             bool isRunning = true;
             while (isRunning)
             {
                 Console.Clear();
-                Visuals.DisplayTitle();
+                Visuals.DisplayShorttitle();
                 var option = AnsiConsole.Prompt(
             new SelectionPrompt<string>()
-                .Title("Menyval")
+                .Title("Huvudmeny")
                 .WrapAround()
-                .AddChoices("Bokningar", "Rum", "Kunder", "Betalningar", "Avsluta"));
+                .AddChoices("Bokningar", "Rum", "Kunder", "Avsluta"));
 
                 AnsiConsole.MarkupLine($"[blue]{option}[/]");
 
@@ -35,9 +36,6 @@ namespace HotelEC.Utilities.Menus
                         break;
                     case "Kunder":
                         CustomerMenu.RunCustomerMenu(db);
-                        break;
-                    case "Betalningar":
-                        //payment menu
                         break;
                     case "Avsluta":
                         Console.Clear();

@@ -1,12 +1,6 @@
-﻿using HotelEC.Controllers;
-using HotelEC.Data;
-using HotelEC.Services;
-using HotelEC.Services.BookingServices;
+﻿using HotelEC.Data;
 using HotelEC.Services.CustomerServices;
 using Spectre.Console;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace HotelEC.Utilities.Menus
 {
@@ -15,7 +9,6 @@ namespace HotelEC.Utilities.Menus
 
         public static void RunCustomerMenu(ApplicationDbContext db)
         {
-            Console.Clear();
             var option = AnsiConsole.Prompt(new SelectionPrompt<string>()
                 .Title("Kundmeny")
                 .WrapAround()
@@ -24,11 +17,11 @@ namespace HotelEC.Utilities.Menus
             switch (option)
             {
                 case "Skapa kund":
-                   var action= new CreateCustomer(db);
+                    var action = new CreateCustomer(db);
                     action.Run();
                     break;
                 case "Visa kunder":
-                    var displayTable=new DisplayCustomers(db);
+                    var displayTable = new DisplayCustomers(db);
                     displayTable.Run();
                     break;
                 case "Uppdatera kund":
@@ -38,8 +31,6 @@ namespace HotelEC.Utilities.Menus
                     var action3 = new DeleteCustomer(db);
                     action3.Run(); break;
                 case "Tillbaka":
-                    Console.Clear();
-                    MainMenu.RunMenu(db);
                     break;
             }
         }

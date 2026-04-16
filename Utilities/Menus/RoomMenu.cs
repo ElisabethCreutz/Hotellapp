@@ -13,7 +13,7 @@ namespace HotelEC.Utilities.Menus
         {
             var options = AnsiConsole.Prompt(
                 new SelectionPrompt<string>()
-                .Title("Select an option:")
+                .Title("Rumsmeny")
                 .AddChoices(new[] {
                     "Visa alla rum",
                     "Lägg till nytt rum",
@@ -39,7 +39,7 @@ namespace HotelEC.Utilities.Menus
                     var deleteRoom = new DeleteRoom(db);
                     deleteRoom.Run();
                     break;
-                case "Tillbaka till huvudmenyn":
+                case "Tillbaka":
                     break;
             }
         }

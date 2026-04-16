@@ -17,7 +17,7 @@ namespace HotelEC.Utilities.Menus
             .Title("Bokningsmeny")
             .WrapAround()
             .AddChoices("Skapa bokning", "Visa bokningar", "Uppdatera bokning", "Ta bort bokning", "Tillbaka"));
-            AnsiConsole.MarkupLine($"Du har valt [blue]{option}[/]");
+            AnsiConsole.MarkupLine($"[blue]{option}[/]");
             switch (option)
             {
                 case "Skapa bokning":
@@ -29,15 +29,15 @@ namespace HotelEC.Utilities.Menus
                     booking.Run();
                     break;
                 case "Uppdatera bokning":
-                    //update booking
+                    Console.WriteLine("Kommande funktion...");
+                    Console.ReadKey();
                     break;
                 case "Ta bort bokning":
-                    //delete booking
+                    Console.WriteLine("Kommande funktion...");
+                    Console.ReadKey();
                     break;
                 case "Tillbaka":
-                    Console.Clear();
-                    MainMenu.RunMenu(db);
-                    break;
+                    break; 
             }
         }
     }
