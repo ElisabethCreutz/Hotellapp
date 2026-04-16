@@ -4,7 +4,7 @@ namespace HotelEC.Utilities
 {
     public class CalendarClass
     {
-        public static void DisplayCalendar()
+        public DateTime DisplayCalendar()
         {
             //Richards Kod
             // Behövs för att kunna visa de blåa pilarna
@@ -38,9 +38,9 @@ namespace HotelEC.Utilities
                         break;
                     case ConsoleKey.Enter:
                         AnsiConsole.MarkupLine($"\nDu valde: [green]{selectedDate:yyyy-MM-dd}[/]");
-                        return; // Avslutar loopen
-                    case ConsoleKey.Escape:
-                        return; // Avbryter valet
+                        return selectedDate; // Avslutar loopen
+                    //case ConsoleKey.Escape:
+                    //    return; //Avbryter valet
                 }
             }
         }

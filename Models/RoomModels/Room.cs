@@ -12,11 +12,11 @@ namespace HotelEC.Models.RoomModels
         public int RoomNumber { get; set; }
         public RoomType Type { get; set; }
         public RoomStatus Status { get; set; }
+        public int RoomSize { get; set; } = 12;
         public int ExtraBeds { get; set; } = 0;
         public decimal PricePerNight { get; set; }
-
         public Room() { }
 
-    
+
     }
 }

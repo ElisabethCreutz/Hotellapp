@@ -17,16 +17,7 @@ namespace HotelEC.Services.BookingServices
         {
             dbContext = db;
         }
-        public void CreateBooking()
-        {
-            dbContext.Bookings.Add(new Booking
-                {
-                CheckInDate = DateTime.Now.ToShortDateString(),
-                //CheckOutDate=**,
-                //GuestId=**,
-                //NumAdults=**
-            });
-        }
+       
         public void UpdateBooking(Booking booking)
         {
         }

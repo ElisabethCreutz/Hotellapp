@@ -1,7 +1,11 @@
 ﻿using HotelEC.Data;
-using System.Globalization;
-using HotelEC.Utilities;
 using HotelEC.Models.BookingModels;
+using HotelEC.Models.CustomerModels;
+using HotelEC.Models.RoomModels;
+using HotelEC.Repositories;
+using HotelEC.Services.CustomerServices;
+using HotelEC.Utilities;
+using Spectre.Console;
 
 namespace HotelEC.Services.BookingServices
 {
@@ -14,9 +18,74 @@ namespace HotelEC.Services.BookingServices
         }
         public void Run()
         {
-            CalendarClass.DisplayCalendar();
-            var booking= new Booking();
+            var booking = new Booking();
+            booking.Guest = SelectCustomerForBooking();
+            Console.Clear();
+            Console.WriteLine($"Välj datum för {booking.Guest.FirstName} {booking.Guest.LastName}");
+            var calendar = new CalendarClass();
+            booking.CheckInDate = calendar.DisplayCalendar();
+            int numNights = AnsiConsole.Prompt(
+                new TextPrompt<int>("Hur många nätter?")
+                .Validate(n =>
+                n > 0 && n < 21
+                ? ValidationResult.Success()
+                : ValidationResult.Error("[red]Antal nätter måste vara mellan 1 och 20[/]")));
+            booking.CheckOutDate = booking.CheckInDate.AddDays(numNights);
+            booking.NumAdults = AnsiConsole.Prompt(
+                new TextPrompt<int>("Hur många vuxna?")
+                .Validate(n =>
+                n > 0 && n < 5
+                ? ValidationResult.Success()
+                : ValidationResult.Error("[red]Antal vuxna måste vara mellan 1 och 4[/]")));
+            booking.NumChildren = AnsiConsole.Prompt(
+                new TextPrompt<int>("Hur många barn?")
+                .Validate(n =>
+                n >= 0 && n < 5
+                ? ValidationResult.Success()
+                : ValidationResult.Error("[red]Antal barn måste vara mellan 0 och 4[/]")));
+            booking.Room = DisplayAvailableRooms(booking.CheckInDate, booking.CheckOutDate, booking.NumAdults, booking.NumChildren);
 
+        }
+        public Room DisplayAvailableRooms(DateTime checkInDate, DateTime checkOutDate, int numAdults, int numChildren)
+        {
+            AnsiConsole.MarkupLine($"Tillgängliga rum mellan [green]{checkInDate:yyyy-MM-dd}[/] och [green]{checkOutDate:yyyy-MM-dd}[/] för [green]{numAdults}[/] vuxna och [green]{numChildren}[/] barn:");
+            dbContext.Rooms.Where(r => r.RoomSize >= numAdults + numChildren && r.Status == RoomStatus.Available).ToList();
+            var unavailable = dbContext.Bookings.Where(b => (b.CheckInDate < checkOutDate && b.CheckOutDate > checkInDate))
+                .Select(b => b.Room);
+            var availableRooms = dbContext.Rooms.Where(r => r.Status == RoomStatus.Available && !unavailable.Contains(r)).ToList();
+            var bookingRoom = AnsiConsole.Prompt(
+                new SelectionPrompt<Room>()
+                .AddChoices(availableRooms)
+                .UseConverter(r => $"Rum {r.RoomNumber} - {r.Type} -  {r.RoomSize}  - {r.PricePerNight:C} per natt"));
+            return bookingRoom;
+        }
+        public Customer SelectCustomerForBooking()
+        {
+            var selection = AnsiConsole.Prompt(
+               new SelectionPrompt<string>()
+               .Title("Välj ny eller befintlig kund")
+               .AddChoices("Ny kund", "Befintlig kund"));
+            AnsiConsole.MarkupLine($"Du var valt {selection}");
+            if (selection == "Ny kund")
+            {
+                var createNew = new CreateCustomer(dbContext);
+                createNew.Run();
+                var newCustomer = dbContext.Customers.Select(c => c).LastOrDefault();
+                return newCustomer;
+            }
+            else
+            {
+                var select = new DisplayCustomers(dbContext);
+                select.Run();
+                var existingCustomer = AnsiConsole.Prompt(new SelectionPrompt<Customer>()
+                    .Title("Välj en kund")
+                    .EnableSearch()
+                    .PageSize(10)
+                    .UseConverter(c => $"{c.Id}: {c.FirstName} {c.LastName}")
+                    .AddChoices(dbContext.Customers));
+                return existingCustomer;
+
+            }
         }
     }
 }

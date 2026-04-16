@@ -21,7 +21,7 @@ namespace HotelEC.Services.BookingServices
             bookingTable.AddColumns("Incheckningsdatum", "Utcheckningsdatum", "Antal vuxna", "Antal barn");
             foreach (var booking in dbContext.Bookings)
             {
-                bookingTable.AddRow(booking.CheckInDate, booking.CheckOutDate, booking.NumAdults.ToString(), booking.NumChildren.ToString());
+                bookingTable.AddRow(booking.CheckInDate.ToString(), booking.CheckOutDate.ToString(), booking.NumAdults.ToString(), booking.NumChildren.ToString());
             }
             AnsiConsole.Write(bookingTable);
             AnsiConsole.MarkupLine("[green]Bokningstabell visad![/]");

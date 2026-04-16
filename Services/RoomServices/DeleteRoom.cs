@@ -25,7 +25,8 @@ namespace HotelEC.Services.RoomServices
               .UseConverter(r => $"Rum {r.RoomNumber}")
               .AddChoices(dbContext.Rooms));
             AnsiConsole.MarkupLine($"Du valde: [blue]{room.RoomNumber}[/]");
-            AnsiConsole.MarkupLine($"Är du säker på att du vill ta bort [red]{room.RoomNumber}[/]? Detta går inte att ångra.");
+            AnsiConsole.MarkupLine($"Är du säker på att du vill ta bort " +
+                $"[red]{room.RoomNumber}[/]? Detta går inte att ångra.");
             var confirm = AnsiConsole.Prompt(
                 new SelectionPrompt<string>()
                     .Title("Bekräfta borttagning:")

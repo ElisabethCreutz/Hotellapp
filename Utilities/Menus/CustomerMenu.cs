@@ -28,7 +28,7 @@ namespace HotelEC.Utilities.Menus
                     action.Run();
                     break;
                 case "Visa kunder":
-                    var displayTable=new DisplayCustomer(db);
+                    var displayTable=new DisplayCustomers(db);
                     displayTable.Run();
                     break;
                 case "Uppdatera kund":

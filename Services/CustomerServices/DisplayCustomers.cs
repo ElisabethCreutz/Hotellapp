@@ -6,12 +6,12 @@ using System.Text;
 
 namespace HotelEC.Services.CustomerServices
 {
-    internal class DisplayCustomer:ICrud
+    internal class DisplayCustomers:ICrud
     {
         public ApplicationDbContext dbContext { get; set; }
 
 
-        public DisplayCustomer(ApplicationDbContext db)
+        public DisplayCustomers(ApplicationDbContext db)
         {
             dbContext = db;
         }
