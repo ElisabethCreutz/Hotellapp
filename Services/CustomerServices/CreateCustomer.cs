@@ -34,6 +34,8 @@ namespace HotelEC.Services.CustomerServices
                     foreach (var failure in result.Errors)
                     {
                         Console.WriteLine(failure.PropertyName + " blev fel. Felet är: " + failure.ErrorMessage + "Försök igen");
+                        Console.ReadKey();
+                        Console.Clear();
                     }
                 }
             }

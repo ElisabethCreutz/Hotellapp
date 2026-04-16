@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace HotelEC.Repositories
+namespace HotelEC.Data
 {
     public enum RoomType
     {

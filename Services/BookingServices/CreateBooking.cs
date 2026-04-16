@@ -2,7 +2,6 @@
 using HotelEC.Models.BookingModels;
 using HotelEC.Models.CustomerModels;
 using HotelEC.Models.RoomModels;
-using HotelEC.Repositories;
 using HotelEC.Services.CustomerServices;
 using HotelEC.Utilities;
 using Spectre.Console;
@@ -44,7 +43,19 @@ namespace HotelEC.Services.BookingServices
                 ? ValidationResult.Success()
                 : ValidationResult.Error("[red]Antal barn måste vara mellan 0 och 4[/]")));
             booking.Room = DisplayAvailableRooms(booking.CheckInDate, booking.CheckOutDate, booking.NumAdults, booking.NumChildren);
-
+            if (booking.Room.Type == RoomType.Double)
+            {
+                if (booking.Room.RoomSize > 12) {
+                AnsiConsole.Prompt(new SelectionPrompt<int>()
+                    .Title("Extrasängar:").AddChoices(0, 1, 2));
+                }
+                else {
+                AnsiConsole.Prompt(new SelectionPrompt<int>()
+                    .Title("Extrasängar:").AddChoices(0, 1));
+                }
+            }
+            dbContext.Bookings.Add(booking);
+            dbContext.SaveChanges();
         }
         public Room DisplayAvailableRooms(DateTime checkInDate, DateTime checkOutDate, int numAdults, int numChildren)
         {
@@ -70,7 +81,7 @@ namespace HotelEC.Services.BookingServices
             {
                 var createNew = new CreateCustomer(dbContext);
                 createNew.Run();
-                var newCustomer = dbContext.Customers.Select(c => c).LastOrDefault();
+                var newCustomer = dbContext.Customers.Select(c => c).OrderBy(c=>c.Id).LastOrDefault();
                 return newCustomer;
             }
             else

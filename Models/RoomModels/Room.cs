@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using HotelEC.Repositories;
+using HotelEC.Data;
 
 namespace HotelEC.Models.RoomModels
 {

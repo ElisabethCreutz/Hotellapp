@@ -6,13 +6,12 @@ namespace HotelEC.Utilities
     {
         public DateTime DisplayCalendar()
         {
-            //Richards Kod
-            // Behövs för att kunna visa de blåa pilarna
-            Console.OutputEncoding = System.Text.Encoding.UTF8;
+            //Richards Kod + modifierat
 
             // Startdatum (början av månaden)
             DateTime currentDate = DateTime.Now;
-            DateTime selectedDate = new DateTime(currentDate.Year, currentDate.Month, 1);
+            //DateTime selectedDate = new DateTime(currentDate.Year, currentDate.Month, 1);
+            DateTime selectedDate = DateTime.Now;
 
             while (true)
             {
@@ -28,19 +27,23 @@ namespace HotelEC.Utilities
                         selectedDate = selectedDate.AddDays(1);
                         break;
                     case ConsoleKey.LeftArrow:
-                        selectedDate = selectedDate.AddDays(-1);
+                        if (selectedDate.AddDays(-1) >= DateTime.Today)
+                            selectedDate = selectedDate.AddDays(-1);
                         break;
                     case ConsoleKey.UpArrow:
-                        selectedDate = selectedDate.AddDays(-7);
+                        if (selectedDate.AddDays(-7) >= DateTime.Today)
+                            selectedDate = selectedDate.AddDays(-7);
                         break;
                     case ConsoleKey.DownArrow:
                         selectedDate = selectedDate.AddDays(7);
                         break;
                     case ConsoleKey.Enter:
                         AnsiConsole.MarkupLine($"\nDu valde: [green]{selectedDate:yyyy-MM-dd}[/]");
-                        return selectedDate; // Avslutar loopen
-                    //case ConsoleKey.Escape:
-                    //    return; //Avbryter valet
+                        return selectedDate;
+
+                        // Avslutar loopen
+                        //case ConsoleKey.Escape:
+                        //    return; //Avbryter valet
                 }
             }
         }
@@ -49,7 +52,7 @@ namespace HotelEC.Utilities
             var calendarContent = new StringWriter();
 
             // Kalenderhuvud
-            calendarContent.WriteLine($"[red]{selectedDate:MMMM}[/]".ToUpper());
+            calendarContent.WriteLine($"[purple]{selectedDate:MMMM}[/]".ToUpper());
             calendarContent.WriteLine("Mån  Tis  Ons  Tor  Fre  Lör  Sön");
             calendarContent.WriteLine("─────────────────────────────────");
 
@@ -84,15 +87,15 @@ namespace HotelEC.Utilities
                 }
             }
 
-            // Skapa en panel med dubbla kanter
+            //Skapa en panel med dubbla kanter
             var panel = new Panel(calendarContent.ToString())
             {
-                Border = BoxBorder.Double,
-                Header = new PanelHeader(($"[red]{selectedDate:yyyy}[/]"), Justify.Center)
+                Border = BoxBorder.Square,
+                Header = new PanelHeader(($"[purple]{selectedDate:yyyy}[/]"), Justify.Center),
             };
 
             AnsiConsole.Write(panel);
-            Console.WriteLine();
+
             AnsiConsole.MarkupLine("\nAnvänd piltangenter [blue]\u25C4 \u25B2 \u25BA \u25BC[/] för att \nnavigera och [green]Enter[/] för att välja.");
         }
 

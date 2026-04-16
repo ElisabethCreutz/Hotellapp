@@ -1,11 +1,5 @@
 ﻿using HotelEC.Data;
 using HotelEC.Utilities.Menus;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Spectre.Console;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace HotelEC
 {
@@ -13,16 +7,16 @@ namespace HotelEC
     {
         public static void Run()
         {
-
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
             var factory = new ApplicationContextFactory();
             var dbContext = factory.CreateDbContext(new string[0]);
 
-            
+
             var dataInitiaizer = new DataInitializer();
             dataInitiaizer.MigrateAndSeed(dbContext);
 
             MainMenu.RunMenu(dbContext);
-            
+
         }
     }
 }
