@@ -16,13 +16,14 @@ namespace HotelEC.Utilities.Menus
             while (isRunning)
             {
                 Console.Clear();
+                Visuals.DisplayTitle();
                 var option = AnsiConsole.Prompt(
             new SelectionPrompt<string>()
                 .Title("Menyval")
                 .WrapAround()
                 .AddChoices("Bokningar", "Rum", "Kunder", "Betalningar", "Avsluta"));
 
-                AnsiConsole.MarkupLine($"Du har valt [blue]{option}[/]");
+                AnsiConsole.MarkupLine($"[blue]{option}[/]");
 
                 switch (option)
                 {

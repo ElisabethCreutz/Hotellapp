@@ -25,7 +25,8 @@ namespace HotelEC.Utilities.Menus
                     action.Run();
                     break;
                 case "Visa bokningar":
-                    //show bookings
+                    var booking = new DisplayBookings(db);
+                    booking.Run();
                     break;
                 case "Uppdatera bokning":
                     //update booking

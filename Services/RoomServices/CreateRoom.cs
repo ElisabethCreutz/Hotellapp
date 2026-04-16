@@ -2,6 +2,9 @@
 using HotelEC.Controllers;
 using HotelEC.Data;
 using HotelEC.Models.RoomModels;
+using HotelEC.Repositories;
+using Microsoft.EntityFrameworkCore;
+using Spectre.Console;
 
 
 namespace HotelEC.Services.RoomServices
@@ -16,27 +19,51 @@ namespace HotelEC.Services.RoomServices
         public void Run()
         {
             var room = new Room();
-            ValidationResult result;
-            do
-            {
-                Console.WriteLine("Vilken våning?");
-                room.Floor = Convert.ToInt32(Console.ReadLine());
-                Console.WriteLine("Enkel eller dubbel?");
-                room.RoomType = Console.ReadLine();
 
-                RoomValidator validator = new RoomValidator();
-                result = validator.Validate(room);
-                if (!result.IsValid)
-                {
-                    foreach (var failure in result.Errors)
-                    {
-                        Console.WriteLine(failure.PropertyName + " blev fel. Felet är: " + failure.ErrorMessage + "Försök igen");
-                    }
-                }
+            room.Floor = new Random().Next(1, 10);
+            room.RoomNumber = GenerateUniqueRoomNumber(room.Floor);
+            room.Type = AnsiConsole.Prompt(new SelectionPrompt<RoomType>()
+                    .Title("Välj rumstyp:")
+                    .AddChoices(RoomType.Single, RoomType.Double));
+            if (room.Type == RoomType.Double)
+            {
+                room.ExtraBeds = AnsiConsole.Prompt(new SelectionPrompt<int>()
+                    .Title("Välj antal extrasängar:")
+                    .AddChoices(0, 1, 2));
             }
-            while (!result.IsValid);
+            else
+            {
+                room.ExtraBeds = 0;
+            }
+            room.Status = RoomStatus.Available;
+            room.PricePerNight = AnsiConsole.Prompt(new SelectionPrompt<decimal>()
+                    .Title("Ange pris per natt:")
+                    .AddChoices(1100, 2200, 1300, 2400, 1500));
+            AnsiConsole.MarkupLine($"[green]Rumsnummer {room.RoomNumber} har skapats på våning {room.Floor}.[/]");
+            Console.ReadKey();
             dbContext.Rooms.Add(room);
             dbContext.SaveChanges();
+        }
+        public int GenerateUniqueRoomNumber(int floor)
+        {
+            int attempts = 0;
+
+            while (attempts < 100)
+            {
+                int randomNumber = new Random().Next(1, 100);
+                int roomNumber = floor * 100 + randomNumber;
+
+                bool exists = dbContext.Rooms
+                    .Any(r => r.RoomNumber == roomNumber);
+
+                if (!exists)
+                {
+                    return roomNumber;
+                }
+
+                attempts++;
+            }
+            throw new Exception("Could not find a free room number."); //kanske se över
         }
     }
 }

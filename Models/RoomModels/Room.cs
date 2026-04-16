@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using HotelEC.Repositories;
 
 namespace HotelEC.Models.RoomModels
 {
@@ -8,8 +9,14 @@ namespace HotelEC.Models.RoomModels
     {
         public int Id { get; set; }
         public int Floor { get; set; }
-        public bool IsBooked { get; set; }
         public int RoomNumber { get; set; }
-        public string RoomType { get; set; }
+        public RoomType Type { get; set; }
+        public RoomStatus Status { get; set; }
+        public int ExtraBeds { get; set; } = 0;
+        public decimal PricePerNight { get; set; }
+
+        public Room() { }
+
+    
     }
 }

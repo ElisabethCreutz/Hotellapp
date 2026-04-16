@@ -1,8 +1,7 @@
 ﻿using HotelEC.Data;
+using HotelEC.Models.RoomModels;
+using HotelEC.Repositories;
 using Spectre.Console;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace HotelEC.Services.RoomServices
 {
@@ -15,28 +14,39 @@ namespace HotelEC.Services.RoomServices
         }
         public void Run()
         {
-            var room = AnsiConsole.Prompt(new SelectionPrompt<string>()
+            DisplayRooms displayRooms = new DisplayRooms(dbContext);
+            displayRooms.Run();
+            var room = AnsiConsole.Prompt(new SelectionPrompt<Room>()
                 .Title("Välj rum att ändra:")
                 .PageSize(15)
                 .EnableSearch()
-                .SearchPlaceholderText("Eller skriv för att söka...")
-                .AddChoices(dbContext.Rooms.Select(r => "Rum " + r.Id + " - " + r.RoomType).ToList()));
-            AnsiConsole.MarkupLine($"Du valde: [blue]{room}[/]");
-             var option = AnsiConsole.Prompt(
-                 new SelectionPrompt<string>()
-                 .Title("Vilken information vill du ändra?")
-                 .PageSize(10)
-                 .AddChoices("Våning", "Rumstyp"));
-             switch (option)
-             {
-                 case "Våning":
-                     var newFloor = AnsiConsole.Ask<int>("Ange ny våning:");
-                     dbContext.Rooms.Where(r => "Rum " + r.Id + " - " + r.RoomType == room).FirstOrDefault().Floor = newFloor;
-                     break;
-                 case "Rumstyp":
-                     var newRoomType = AnsiConsole.Ask<string>("Ange ny rumstyp:");
-                     dbContext.Rooms.Where(r => "Rum " + r.Id + " - " + r.RoomType == room).FirstOrDefault().RoomType = newRoomType;
-                     break;
+                .UseConverter(r => $"Rum {r.RoomNumber}")
+                .AddChoices(dbContext.Rooms));
+            AnsiConsole.MarkupLine($"Du valde: [blue]{room.RoomNumber}[/]");
+            var option = AnsiConsole.Prompt(
+                new SelectionPrompt<string>()
+                .Title("Vilken information vill du ändra?")
+                .PageSize(10)
+                .AddChoices("Rumstyp", "Pris"));
+            switch (option)
+            {
+                case "Rumstyp":
+                    room.Type = AnsiConsole.Prompt(
+                       new SelectionPrompt<RoomType>()
+                       .Title("Välj rumstyp:")
+                       .PageSize(10)
+                       .AddChoices(RoomType.Single, RoomType.Double));
+                    AnsiConsole.MarkupLine($"[green]Rum {room.RoomNumber}[/] har uppdaterats till ett {room.Type}.");
+                    dbContext.SaveChanges();
+                    break;
+                case "Pris":
+                    var newPrice = AnsiConsole.Ask<decimal>("Ange nytt pris:");
+
+                    room.PricePerNight = newPrice;
+                    dbContext.SaveChanges();
+                    AnsiConsole.MarkupLine($"[green]Rum {room.RoomNumber}[/] har uppdaterats med nytt pris {room.PricePerNight} kr per natt.");
+                    Console.ReadKey();
+                    break;
             }
         }
     }

@@ -16,15 +16,8 @@ namespace HotelEC.Data
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Booking> Bookings { get; set; }
         public DbSet<Room> Rooms { get; set; }
-        //public DbSet<Floor> Floor { get; set; }
-        //public DbSet<Payment> Payment { get; set; }
-        //public DbSet<RoomClass> RoomClass { get; set; }
-        //public DbSet<RoomStatus> RoomStatus { get; set; }
-        //public DbSet<BedType> BedType { get; set; }
-        //public DbSet<RoomClassBedType> RoomClassBedType { get; set; }
-        //public DbSet<BookingRoom> BookingRoom { get; set; }
-        //public DbSet<Addon> Addon { get; set; }
 
+        
 
         /// <summary>
         /// Tom konstruktor: Denna tomma konstruktor behövs om du vill använda migrations
@@ -44,6 +37,13 @@ namespace HotelEC.Data
             : base(options)
         {
         }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<Room>()
+                .HasIndex(r => r.RoomNumber)
+                .IsUnique();
+        }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using Bogus;
 using HotelEC.Models;
 using HotelEC.Models.RoomModels;
-using HotelEC.Utilities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -26,25 +25,25 @@ namespace HotelEC.Data
                 dbContext.Rooms.AddRange(new Room
                 {
                     Floor = 1,
-                    IsBooked = false,
+                    
                     RoomNumber = 101
                 },
                 new Room
                 {
                     Floor = 2,
-                    IsBooked = false,
+                    
                     RoomNumber = 201
                 },
                 new Room
                 {
                     Floor = 3,
-                    IsBooked = false,
+                    
                     RoomNumber = 301
                 },
                 new Room
                 {
                     Floor = 4,
-                    IsBooked = false,
+                    
                     RoomNumber = 401
                 }
                 );

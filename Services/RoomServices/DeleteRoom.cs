@@ -1,4 +1,5 @@
 ﻿using HotelEC.Data;
+using HotelEC.Models.RoomModels;
 using Spectre.Console;
 using System;
 using System.Collections.Generic;
@@ -15,27 +16,26 @@ namespace HotelEC.Services.RoomServices
         }
         public void Run()
         {
-            var room = AnsiConsole.Prompt(new SelectionPrompt<string>()
-                .Title("Välj rum att ta bort:")
-                .PageSize(15)
-                .EnableSearch()
-                .SearchPlaceholderText("Eller skriv för att söka...")
-                .AddChoices(dbContext.Rooms.Select(r => "Rum " + r.Id + " - " + r.RoomType).ToList()));
-            AnsiConsole.MarkupLine($"Du valde: [blue]{room}[/]");
-            AnsiConsole.MarkupLine($"Är du säker på att du vill ta bort [red]{room}[/]? Detta går inte att ångra.");
+            DisplayRooms displayRooms = new DisplayRooms(dbContext);
+            displayRooms.Run();
+            var room = AnsiConsole.Prompt(new SelectionPrompt<Room>()
+              .Title("Välj rum att ta bort:")
+              .PageSize(15)
+              .EnableSearch()
+              .UseConverter(r => $"Rum {r.RoomNumber}")
+              .AddChoices(dbContext.Rooms));
+            AnsiConsole.MarkupLine($"Du valde: [blue]{room.RoomNumber}[/]");
+            AnsiConsole.MarkupLine($"Är du säker på att du vill ta bort [red]{room.RoomNumber}[/]? Detta går inte att ångra.");
             var confirm = AnsiConsole.Prompt(
                 new SelectionPrompt<string>()
                     .Title("Bekräfta borttagning:")
                     .AddChoices("Ja", "Nej"));
             if (confirm == "Ja")
             {
-                var roomToDelete = dbContext.Rooms.Where(r => "Rum " + r.Id + " - " + r.RoomType == room).FirstOrDefault();
-                if (roomToDelete != null)
-                {
-                    dbContext.Rooms.Remove(roomToDelete);
-                    dbContext.SaveChanges();
-                    AnsiConsole.MarkupLine($"[green]{room}[/] har tagits bort.");
-                }
+                dbContext.Rooms.Remove(room);
+                dbContext.SaveChanges();
+                AnsiConsole.MarkupLine($"[green]{room.RoomNumber}[/] har tagits bort.");
+
             }
         }
     }

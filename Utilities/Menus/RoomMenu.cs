@@ -24,8 +24,8 @@ namespace HotelEC.Utilities.Menus
             switch (options)
             {
                 case "Visa alla rum":
-                    var roomTable = new SpectreTables(db);
-                    roomTable.DisplayRoomTable();
+                    var roomTable = new DisplayRooms(db);
+                    roomTable.Run();
                     break;
                 case "Lägg till nytt rum":
                     var createRoom = new CreateRoom(db);

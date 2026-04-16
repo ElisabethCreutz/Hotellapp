@@ -1,6 +1,7 @@
 ﻿using HotelEC.Data;
 using System.Globalization;
 using HotelEC.Utilities;
+using HotelEC.Models.BookingModels;
 
 namespace HotelEC.Services.BookingServices
 {
@@ -14,6 +15,8 @@ namespace HotelEC.Services.BookingServices
         public void Run()
         {
             CalendarClass.DisplayCalendar();
+            var booking= new Booking();
+
         }
     }
 }

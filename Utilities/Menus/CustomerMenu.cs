@@ -1,6 +1,7 @@
 ﻿using HotelEC.Controllers;
 using HotelEC.Data;
 using HotelEC.Services;
+using HotelEC.Services.BookingServices;
 using HotelEC.Services.CustomerServices;
 using Spectre.Console;
 using System;
@@ -27,8 +28,8 @@ namespace HotelEC.Utilities.Menus
                     action.Run();
                     break;
                 case "Visa kunder":
-                    var displayTable=new SpectreTables(db);
-                    displayTable.DisplayCustomerTable();
+                    var displayTable=new DisplayCustomer(db);
+                    displayTable.Run();
                     break;
                 case "Uppdatera kund":
                     var action2 = new UpdateCustomer(db);
