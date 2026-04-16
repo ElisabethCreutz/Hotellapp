@@ -54,6 +54,7 @@ namespace HotelEC.Services.BookingServices
                     .Title("Extrasängar:").AddChoices(0, 1));
                 }
             }
+            booking.BookingAmount= booking.Room.PricePerNight * numNights;
             //display a summary of the booking before saving
             dbContext.Bookings.Add(booking);
             dbContext.SaveChanges();

@@ -14,8 +14,8 @@ namespace HotelEC.Utilities.Menus
             var options = AnsiConsole.Prompt(
                 new SelectionPrompt<string>()
                 .AddChoices(new[] {
-                    "Visa alla rum",
-                    "Lägg till nytt rum",
+                    "Skapa rum",
+                    "Visa rum",
                     "Uppdatera rum",
                     "Ta bort rum",
                     "Tillbaka"
@@ -23,13 +23,13 @@ namespace HotelEC.Utilities.Menus
             AnsiConsole.MarkupLine($"[blue]{options.ToUpper()}[/]");
             switch (options)
             {
-                case "Visa alla rum":
-                    var roomTable = new DisplayRooms(db);
-                    roomTable.Run();
-                    break;
-                case "Lägg till nytt rum":
+                case "Skapa rum":
                     var createRoom = new CreateRoom(db);
                     createRoom.Run();
+                    break;
+                case "Visa rum":
+                    var roomTable = new DisplayRooms(db);
+                    roomTable.Run();
                     break;
                 case "Uppdatera rum":
                     var updateRoom = new UpdateRoom(db);

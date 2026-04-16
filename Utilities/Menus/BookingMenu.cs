@@ -11,7 +11,6 @@ namespace HotelEC.Utilities.Menus
     {
         public static void RunBookingMenu(ApplicationDbContext db)
         {
-
             var option = AnsiConsole.Prompt(
         new SelectionPrompt<string>()
             .WrapAround()

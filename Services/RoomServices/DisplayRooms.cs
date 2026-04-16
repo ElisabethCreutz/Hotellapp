@@ -26,6 +26,7 @@ namespace HotelEC.Services.RoomServices
                 roomTable.AddRow(room.RoomNumber.ToString(), room.Floor.ToString(), room.Type.ToString(), room.PricePerNight.ToString(), room.ExtraBeds.ToString(), room.Status.ToString());
             }
             AnsiConsole.Write(roomTable);
+            AnsiConsole.MarkupLine("[purple]Tryck på valfri tangent för att fortsätta...[/]");
             Console.ReadKey();
         }
     }

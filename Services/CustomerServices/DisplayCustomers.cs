@@ -28,6 +28,7 @@ namespace HotelEC.Services.CustomerServices
                 CustTable.AddRow(customer.FirstName, customer.LastName, customer.PhoneNumber, customer.EmailAddress);
             }
             AnsiConsole.Write(CustTable);
+            AnsiConsole.MarkupLine("[purple]Tryck på valfri tangent för att fortsätta...[/]");
             Console.ReadKey();
         }
     }
