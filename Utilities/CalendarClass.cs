@@ -7,10 +7,6 @@ namespace HotelEC.Utilities
         public DateTime DisplayCalendar()
         {
             //Richards Kod + modifierat
-
-            //// Startdatum (början av månaden)
-            //DateTime currentDate = DateTime.Now;
-            ////DateTime selectedDate = new DateTime(currentDate.Year, currentDate.Month, 1);
             DateTime selectedDate = DateTime.Now;
 
             while (true)
