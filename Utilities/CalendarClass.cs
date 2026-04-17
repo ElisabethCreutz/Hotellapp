@@ -8,9 +8,9 @@ namespace HotelEC.Utilities
         {
             //Richards Kod + modifierat
 
-            // Startdatum (början av månaden)
-            DateTime currentDate = DateTime.Now;
-            //DateTime selectedDate = new DateTime(currentDate.Year, currentDate.Month, 1);
+            //// Startdatum (början av månaden)
+            //DateTime currentDate = DateTime.Now;
+            ////DateTime selectedDate = new DateTime(currentDate.Year, currentDate.Month, 1);
             DateTime selectedDate = DateTime.Now;
 
             while (true)
@@ -40,10 +40,6 @@ namespace HotelEC.Utilities
                     case ConsoleKey.Enter:
                         AnsiConsole.MarkupLine($"\nDu valde: [green]{selectedDate:yyyy-MM-dd}[/]");
                         return selectedDate;
-
-                        // Avslutar loopen
-                        //case ConsoleKey.Escape:
-                        //    return; //Avbryter valet
                 }
             }
         }
@@ -96,7 +92,7 @@ namespace HotelEC.Utilities
 
             AnsiConsole.Write(panel);
 
-            AnsiConsole.MarkupLine("\nAnvänd piltangenter [blue]\u25C4 \u25B2 \u25BA \u25BC[/] för att \nnavigera och [green]Enter[/] för att välja.");
+            AnsiConsole.MarkupLine("\nAnvänd piltangenter [purple]\u25C4 \u25B2 \u25BA \u25BC[/] för att \nnavigera och [green]Enter[/] för att välja.");
         }
 
     }

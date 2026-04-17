@@ -1,21 +1,15 @@
 ﻿using HotelEC.Data;
 using Spectre.Console;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace HotelEC.Services.CustomerServices
 {
-    internal class DisplayCustomers:ICrud
+    public class DisplayCustomers : ICrud
     {
         public ApplicationDbContext dbContext { get; set; }
-
-
         public DisplayCustomers(ApplicationDbContext db)
         {
             dbContext = db;
         }
-
         public void Run()
         {
             var CustTable = new Table();

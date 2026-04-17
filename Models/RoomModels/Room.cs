@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using HotelEC.Data;
+﻿using HotelEC.Data;
 
 namespace HotelEC.Models.RoomModels
 {
@@ -15,8 +12,5 @@ namespace HotelEC.Models.RoomModels
         public int RoomSize { get; set; } = 12;
         public int ExtraBeds { get; set; } = 0;
         public decimal PricePerNight { get; set; }
-        public Room() { }
-
-
     }
 }

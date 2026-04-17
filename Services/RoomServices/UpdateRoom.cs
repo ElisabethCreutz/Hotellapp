@@ -4,7 +4,7 @@ using Spectre.Console;
 
 namespace HotelEC.Services.RoomServices
 {
-    internal class UpdateRoom : ICrud
+    public class UpdateRoom : ICrud
     {
         public ApplicationDbContext dbContext { get; set; }
         public UpdateRoom(ApplicationDbContext db)

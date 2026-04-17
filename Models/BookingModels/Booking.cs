@@ -13,7 +13,5 @@ namespace HotelEC.Models.BookingModels
         public int NumAdults { get; set; }
         public int NumChildren { get; set; }
         public decimal BookingAmount { get; set; }
-
-
     }
 }

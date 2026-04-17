@@ -1,11 +1,8 @@
 ﻿using Spectre.Console;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace HotelEC.Utilities
 {
-    internal class Visuals
+    public class Visuals
     {
         public static void DisplayTitle()
         {
@@ -19,9 +16,7 @@ namespace HotelEC.Utilities
             {
                 Border = BoxBorder.Rounded,
                 BorderStyle = new Style(Color.Green),
-                //Padding = new Padding(1, 1, 1, 1)
             };
-
             AnsiConsole.Write(panel);
         }
         public static void DisplayShorttitle()
@@ -36,10 +31,8 @@ namespace HotelEC.Utilities
             {
                 Border = BoxBorder.Rounded,
                 BorderStyle = new Style(Color.Green),
-                //Padding = new Padding(1, 1, 1, 1)
             };
-
             AnsiConsole.Write(panel);
         }
-        }
+    }
 }

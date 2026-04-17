@@ -1,13 +1,10 @@
 ﻿using HotelEC.Data;
 using HotelEC.Services.RoomServices;
 using Spectre.Console;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace HotelEC.Utilities.Menus
 {
-    internal class RoomMenu
+    public class RoomMenu
     {
         public static void RunRoomMenu(ApplicationDbContext db)
         {

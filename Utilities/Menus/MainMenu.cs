@@ -1,9 +1,5 @@
 ﻿using HotelEC.Data;
-using HotelEC.Models;
 using Spectre.Console;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace HotelEC.Utilities.Menus
 {

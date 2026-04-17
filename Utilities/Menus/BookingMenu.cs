@@ -1,13 +1,10 @@
 ﻿using HotelEC.Data;
 using HotelEC.Services.BookingServices;
 using Spectre.Console;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace HotelEC.Utilities.Menus
 {
-    internal class BookingMenu
+    public class BookingMenu
     {
         public static void RunBookingMenu(ApplicationDbContext db)
         {
@@ -35,9 +32,8 @@ namespace HotelEC.Utilities.Menus
                     Console.ReadKey();
                     break;
                 case "Tillbaka":
-                    break; 
+                    break;
             }
         }
     }
 }
-

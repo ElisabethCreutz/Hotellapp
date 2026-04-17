@@ -6,7 +6,6 @@ namespace HotelEC.Utilities.Menus
 {
     public class CustomerMenu
     {
-
         public static void RunCustomerMenu(ApplicationDbContext db)
         {
             var option = AnsiConsole.Prompt(new SelectionPrompt<string>()

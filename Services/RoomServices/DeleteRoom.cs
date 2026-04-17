@@ -1,9 +1,6 @@
 ﻿using HotelEC.Data;
 using HotelEC.Models.RoomModels;
 using Spectre.Console;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace HotelEC.Services.RoomServices
 {

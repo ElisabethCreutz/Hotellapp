@@ -2,10 +2,6 @@
 using HotelEC.Models.CustomerModels;
 using HotelEC.Models.RoomModels;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics.Metrics;
-using System.Text;
 
 namespace HotelEC.Data
 {
@@ -17,7 +13,7 @@ namespace HotelEC.Data
         public DbSet<Booking> Bookings { get; set; }
         public DbSet<Room> Rooms { get; set; }
 
-        
+
 
         /// <summary>
         /// Tom konstruktor: Denna tomma konstruktor behövs om du vill använda migrations

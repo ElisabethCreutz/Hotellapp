@@ -1,11 +1,5 @@
-﻿using Bogus;
-using HotelEC.Models;
-using HotelEC.Models.RoomModels;
+﻿using HotelEC.Models.RoomModels;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace HotelEC.Data
 {
@@ -45,7 +39,7 @@ namespace HotelEC.Data
                     Type = RoomType.Double,
                     RoomSize = 12,
                     ExtraBeds = 1,
-                    Status = RoomStatus.Available, 
+                    Status = RoomStatus.Available,
                     PricePerNight = 1200m
                 },
                 new Room
@@ -63,7 +57,6 @@ namespace HotelEC.Data
         }
         private void SeedCustomers(ApplicationDbContext dbContext)
         {
-
             if (!dbContext.Customers.Any())
             {
                 var customers = BogusCustomers.Create(10);

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace HotelEC.Data
+﻿namespace HotelEC.Data
 {
     public enum RoomType
     {
@@ -12,13 +8,6 @@ namespace HotelEC.Data
     public enum RoomStatus
     {
         Available,
-        Occupied
+        Unavailable
     }
-        public enum BookingStatus
-    {
-        Active,
-        Cancelled,
-        Completed
-    }
-
-}
+   }

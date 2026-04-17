@@ -1,9 +1,4 @@
-﻿using Bogus.DataSets;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace HotelEC.Models.CustomerModels
+﻿namespace HotelEC.Models.CustomerModels
 {
     public class Customer
     {
@@ -12,7 +7,7 @@ namespace HotelEC.Models.CustomerModels
         public string LastName { get; set; }
         public string EmailAddress { get; set; }
         public string PhoneNumber { get; set; }
-        
+
         //public CustomerAddress Address { get; set; }
         //public InvoiceAddress InvoiceAddress { get; set; }
     }

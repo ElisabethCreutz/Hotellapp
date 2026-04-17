@@ -11,12 +11,10 @@ namespace HotelEC
             var factory = new ApplicationContextFactory();
             var dbContext = factory.CreateDbContext(new string[0]);
 
-
             var dataInitiaizer = new DataInitializer();
             dataInitiaizer.MigrateAndSeed(dbContext);
 
             MainMenu.RunMenu(dbContext);
-
         }
     }
 }

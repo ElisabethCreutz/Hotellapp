@@ -1,8 +1,5 @@
 ﻿using HotelEC.Data;
 using Spectre.Console;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace HotelEC.Services.CustomerServices
 {
@@ -13,7 +10,6 @@ namespace HotelEC.Services.CustomerServices
         {
             dbContext = db;
         }
-
         public void Run()
         {
             var customer = AnsiConsole.Prompt(
@@ -29,7 +25,7 @@ namespace HotelEC.Services.CustomerServices
                 new SelectionPrompt<string>()
                     .Title("Bekräfta borttagning:")
                     .AddChoices("Ja", "Nej"));
-            
+
             if (confirm == "Ja")
             {
                 var customerToDelete = dbContext.Customers.FirstOrDefault(c => c.FirstName + " " + c.LastName == customer);
@@ -43,4 +39,3 @@ namespace HotelEC.Services.CustomerServices
         }
     }
 }
-

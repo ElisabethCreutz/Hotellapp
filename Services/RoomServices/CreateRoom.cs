@@ -1,8 +1,5 @@
-﻿using FluentValidation.Results;
-using HotelEC.Controllers;
-using HotelEC.Data;
+﻿using HotelEC.Data;
 using HotelEC.Models.RoomModels;
-using Microsoft.EntityFrameworkCore;
 using Spectre.Console;
 
 
@@ -19,7 +16,7 @@ namespace HotelEC.Services.RoomServices
         {
             var room = new Room();
 
-            room.Floor = new Random().Next(1, 10);
+            room.Floor = new Random().Next(1, 6);
             room.RoomNumber = GenerateUniqueRoomNumber(room.Floor);
             room.Type = AnsiConsole.Prompt(new SelectionPrompt<RoomType>()
                     .Title("Välj rumstyp:")
@@ -27,13 +24,13 @@ namespace HotelEC.Services.RoomServices
             room.RoomSize = AnsiConsole.Prompt(new SelectionPrompt<int>()
                     .Title("Välj rumstorlek i kvadratmeter:")
                     .AddChoices(10, 12, 15, 20, 22));
-            if (room.Type == RoomType.Double&& room.RoomSize > 12)
+            if (room.Type == RoomType.Double && room.RoomSize > 12)
             {
                 room.ExtraBeds = AnsiConsole.Prompt(new SelectionPrompt<int>()
                     .Title("Välj antal extrasängar:")
                     .AddChoices(1, 2));
             }
-            else if (room.Type== RoomType.Double && room.RoomSize <= 12)
+            else if (room.Type == RoomType.Double && room.RoomSize <= 12)
             {
                 room.ExtraBeds = 1;
             }
@@ -41,7 +38,7 @@ namespace HotelEC.Services.RoomServices
             {
                 room.ExtraBeds = 0;
             }
-            
+
             room.Status = RoomStatus.Available;
             room.PricePerNight = AnsiConsole.Prompt(new SelectionPrompt<decimal>()
                     .Title("Ange pris per natt:")

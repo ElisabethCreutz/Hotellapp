@@ -1,5 +1,4 @@
 ﻿using HotelEC.Data;
-using HotelEC.Models.BookingModels;
 using Spectre.Console;
 
 namespace HotelEC.Services.CustomerServices
@@ -11,8 +10,6 @@ namespace HotelEC.Services.CustomerServices
         {
             dbContext = db;
         }
-
-
         public void Run()
         {
             var customer = AnsiConsole.Prompt(
@@ -48,8 +45,6 @@ namespace HotelEC.Services.CustomerServices
                     dbContext.Customers.Where(c => c.FirstName + " " + c.LastName == customer).FirstOrDefault().PhoneNumber = newPhone;
                     break;
             }
-
         }
     }
-
 }
